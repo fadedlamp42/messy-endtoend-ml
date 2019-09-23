@@ -9,17 +9,11 @@ using std::cout;
 using std::endl;
 
 int main(int argc, char**argv){
-    CsvLoader l1;
-    Table t1 = l1.read("data/test");
-    /*Column c1("dude nice");
+    CsvLoader loader;
+    std::string fileName = (argc > 1) ? argv[1] : "";
+    Table data_set = loader.read(fileName);
 
-    for(int x=0; x<10; ++x)
-        c1.push(x);
-
-    for(int x=0; x<5; ++x)
-        t1.push(c1);*/
-
-    t1.print();
+    data_set.print();
 
     return 0;
 }

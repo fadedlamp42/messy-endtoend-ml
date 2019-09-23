@@ -19,7 +19,11 @@ class Table{
     }
 
     void print(){
+        if(columns.size()==0)
+            return;
+
         size_t widths[columns.size()];
+
         for(unsigned int x=0; x<columns.size(); ++x)
             widths[x] = columns[x].header.size();
 

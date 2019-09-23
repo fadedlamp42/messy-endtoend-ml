@@ -36,6 +36,11 @@ class CsvLoader{
         ifstream in_file;
         in_file.open(name+".csv");
 
+        if(!in_file){
+            cout << "Bad file" << endl;
+            return result;
+        }
+
         std::string stream;
         int row = 0;
         while(std::getline(in_file, stream)){ //for every line

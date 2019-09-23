@@ -6,7 +6,7 @@ build:
 	@g++ $(target).cpp -lm -o out -Wall
 
 test: build
-	./out
+	./out data/test
 
 clean:
 	rm out *.o
