@@ -18,6 +18,33 @@ class Table{
         return columns[x].data[y];
     }
 
+    Table trim(int from, int to = 0){
+        int lower = 0, upper = columns.size()-1;
+
+        //bound checking for indices
+        //could be implemented with conditionals but this is legible
+            //checking starting index
+        if(from < lower)
+            from = 0;
+        if(from>upper)
+            from = upper;
+            //checking ending index
+        if (to < from)
+            to = from;
+        if(to>upper)
+            to = upper;
+
+        //print range split for debugging
+        //cout << "[" << from << ", " << to << "]" << endl; //debug
+
+        //declare and define output table
+        Table result;
+        for(int x=from; x<=to; ++x)
+            result.push(columns[x]);
+
+        return result;
+    }
+
     void print(){
         if(columns.size()==0)
             return;
