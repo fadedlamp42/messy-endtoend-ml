@@ -9,6 +9,7 @@ using namespace std;
 
 class Table{
     public:
+        enum pos{begin, middle, end};
     std::vector<Column> columns;
     void push(const Column& arg){
         columns.push_back(arg);
@@ -18,7 +19,7 @@ class Table{
         return columns[x].data[y];
     }
 
-    Table trim(int from, int to = 0){
+    Table slice(int from, int to = 0){
         int lower = 0, upper = columns.size()-1;
 
         //bound checking for indices
@@ -41,6 +42,24 @@ class Table{
         Table result;
         for(int x=from; x<=to; ++x)
             result.push(columns[x]);
+
+        return result;
+    }
+
+    Table dice(double proportion, pos position = pos::begin){
+        int size = abs(int(columns.back().data.size()*proportion));
+
+        Table result;
+        //spit COLUMNS in proportion, not columns INTO proportion (that's what slice does)
+        switch(position){
+            case pos::begin:
+                break;
+            case pos::middle: {
+                break;
+            }
+            case pos::end:
+                break;
+        }
 
         return result;
     }

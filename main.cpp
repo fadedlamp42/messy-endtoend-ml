@@ -20,11 +20,9 @@ int main(int argc, char**argv){
 
     //Table.print() method on loaded data
     data_set.print();
-    Table features = data_set.trim(0,1);
-    Table targets = data_set.trim(2);
 
-    features.print();
-    targets.print();
+    data_set.dice(0.3, Table::middle);
+
 
     return 0;
 }
