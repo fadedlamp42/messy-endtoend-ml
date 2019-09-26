@@ -55,7 +55,9 @@ class Table{
     Table dice(double proportion, pos position = pos::begin, bool complement = false){
         int new_size = abs(int(columns.back().data.size()*proportion));
         int column_size = columns.back().data.size();
-        cout << proportion*100 << "\% of " << columns.back().data.size() << ": " << new_size << endl;
+
+        //print amount of elements for debugging
+        //cout << proportion*100 << "\% of " << columns.back().data.size() << ": " << new_size << endl;
 
         Table result;
         bool keep[column_size];

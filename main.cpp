@@ -21,8 +21,8 @@ int main(int argc, char**argv){
     //Table.print() method on loaded data
     data_set.print();
 
-    Table t1 = data_set.dice(0.5, Table::random);
-    Table t2 = data_set.dice(0.5, Table::random, true);
+    Table t1 = data_set.dice(0.3, Table::begin);
+    Table t2 = data_set.dice(0.3, Table::begin, true);
     t1.print();
     t2.print();
 
