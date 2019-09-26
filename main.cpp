@@ -21,7 +21,10 @@ int main(int argc, char**argv){
     //Table.print() method on loaded data
     data_set.print();
 
-    data_set.dice(0.3, Table::middle);
+    Table t1 = data_set.dice(0.3, Table::end);
+    Table t2 = data_set.dice(0.3, Table::end, true);
+    t1.print();
+    t2.print();
 
 
     return 0;

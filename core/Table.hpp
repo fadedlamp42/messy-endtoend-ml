@@ -9,7 +9,7 @@ using namespace std;
 
 class Table{
     public:
-        enum pos{begin, middle, end};
+        enum pos{begin, middle, end, random}; //implement random split
     std::vector<Column> columns;
     void push(const Column& arg){
         columns.push_back(arg);
@@ -46,20 +46,55 @@ class Table{
         return result;
     }
 
-    Table dice(double proportion, pos position = pos::begin){
-        int size = abs(int(columns.back().data.size()*proportion));
+    /*arguments:
+     * proportion: from 0-1, % of values to return
+     * position: [begin...], [..middle..], or [...end] (might replace)
+     * complement: boolean which when true, exactly inverts values returned*/
+    Table dice(double proportion, pos position = pos::begin, bool complement = false){
+        int new_size = abs(int(columns.back().data.size()*proportion));
+        int column_size = columns.back().data.size();
+        cout << proportion*100 << "\% of " << columns.back().data.size() << ": " << new_size << endl;
 
         Table result;
-        //spit COLUMNS in proportion, not columns INTO proportion (that's what slice does)
+        bool keep[column_size];
+        for(int x=0; x<column_size; ++x)
+            keep[x] = false;
+
+        //write expression to express beginning and end
         switch(position){
-            case pos::begin:
+            case pos::begin: //keep "size" values from beginning
+                for(int x=0; x<new_size; ++x)
+                    keep[x] = true;
                 break;
-            case pos::middle: {
+            case pos::middle:
+                for(int x=0; x<new_size; ++x)
+                    keep[x+(column_size/3)] = true;
                 break;
-            }
-            case pos::end:
+            case pos::end: //keep "size" values from end
+                for(int x=column_size-1; 
+                        x>column_size-new_size-1; --x)
+                    keep[x] = true;
+                break;
+            case pos::random:
+                //IMPLEMENT RANDOM SELECTION OF ELEMENTS
                 break;
         }
+
+        for(Column i : columns){ //for each column in original table
+            Column temp(i.header); //make a new column with the same header
+            for(int x=0; x<column_size; ++x){//for every "keep" value
+                bool b = keep[x];
+                if(complement)
+                    b = !b;
+
+                if(b) //if keeping index
+                    temp.data.push_back(i.data[x]); //push from original table to new
+            }
+            result.push(temp);
+        }
+
+        return result;
+
 
         return result;
     }
