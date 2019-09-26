@@ -1,9 +1,11 @@
 #ifndef TABLE_H
 #define TABLE_H
 #include <vector>
-#include "Column.hpp"
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <random>
+#include "Column.hpp"
 using namespace std;
 //grouping of columns with basic accessor
 
@@ -60,7 +62,7 @@ class Table{
         for(int x=0; x<column_size; ++x)
             keep[x] = false;
 
-        //write expression to express beginning and end
+        //define list of boolean representing which values to "keep" from each column
         switch(position){
             case pos::begin: //keep "size" values from beginning
                 for(int x=0; x<new_size; ++x)
@@ -75,8 +77,12 @@ class Table{
                         x>column_size-new_size-1; --x)
                     keep[x] = true;
                 break;
-            case pos::random:
-                //IMPLEMENT RANDOM SELECTION OF ELEMENTS
+            case pos::random:{
+                for(int x=0; x<new_size; ++x)
+                    keep[x] = true;
+                auto rng = default_random_engine(time(NULL));
+                shuffle(&keep[0], &keep[column_size-1], rng);
+                } //explicit scope to prevent memory leaks
                 break;
         }
 
