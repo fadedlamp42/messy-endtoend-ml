@@ -10,13 +10,15 @@ Start date: 09/23/19
 # Tenative plans
 Load data from csv [x]
 
-Add command-line functionality [ ]
+Add command-line functionality [X]
+  
+  Implement flags [ ]
 
 Implement data partitioning (train/test split) [ ]
 
-  Split by columns (seperate features and target)
+  Split by columns (seperate features and target) [X]
   
-  Split by rows (seperate train and test)
+  Split by rows (seperate train and test) [ ]
   
 Write template or abstract to be used for defining models with virtual functions like fit and predict [ ]
 
