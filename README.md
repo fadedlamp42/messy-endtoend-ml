@@ -12,17 +12,17 @@ Load data from csv [x]
 
 Add command-line functionality [x]
   
-   Implement flags [ ]
+     Implement flags [ ]
 
 Implement data partitioning (train/test split) [x]
 
-   Split by columns (seperate features and target) [x]
+     Split by columns (seperate features and target) [x]
   
-   Split by rows (seperate train and test) [x]
+     Split by rows (seperate train and test) [x]
   
 Write template or abstract to be used for defining models with virtual functions like fit and predict [ ]
 
-  Possibly implement a way to save the state of a model to be loaded later [ ]
+    Possibly implement a way to save the state of a model to be loaded later [ ]
 
 Implement statistic model(s) [ ]
 

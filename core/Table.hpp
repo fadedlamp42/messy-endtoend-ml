@@ -10,8 +10,12 @@ using namespace std;
 //grouping of columns with basic accessor
 
 class Table{
+    string title;
     public:
-        enum pos{begin, middle, end, random}; //implement random split
+    Table(string arg = "Untitled Table"){title = arg;}
+    void setTitle(string arg){title = arg;}
+
+    enum pos{begin, middle, end, random}; //implement random split
     std::vector<Column> columns;
     void push(const Column& arg){
         columns.push_back(arg);
@@ -52,7 +56,7 @@ class Table{
      * proportion: from 0-1, % of values to return
      * position: [begin...], [..middle..], or [...end] (might replace)
      * complement: boolean which when true, exactly inverts values returned*/
-    Table dice(double proportion, pos position = pos::begin, bool complement = false){
+    Table dice(double proportion, bool complement = false, pos position = pos::begin, int seed = rand()){
         int new_size = abs(int(columns.back().data.size()*proportion));
         int column_size = columns.back().data.size();
 
@@ -70,7 +74,7 @@ class Table{
                 for(int x=0; x<new_size; ++x)
                     keep[x] = true;
                 break;
-            case pos::middle:
+            case pos::middle: //FIX THIS BEHAVIOR
                 for(int x=0; x<new_size; ++x)
                     keep[x+(column_size/3)] = true;
                 break;
@@ -82,7 +86,7 @@ class Table{
             case pos::random:{
                 for(int x=0; x<new_size; ++x)
                     keep[x] = true;
-                auto rng = default_random_engine(time(NULL));
+                auto rng = default_random_engine(seed);
                 shuffle(&keep[0], &keep[column_size-1], rng);
                 } //explicit scope to prevent memory leaks
                 break;
@@ -102,14 +106,13 @@ class Table{
         }
 
         return result;
-
-
-        return result;
     }
 
     void print(){
         if(columns.size()==0)
             return;
+
+        cout << "  " << title << endl;
 
         size_t widths[columns.size()];
 

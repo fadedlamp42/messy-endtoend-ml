@@ -17,12 +17,18 @@ int main(int argc, char**argv){
 
     //load filename.csv into data_set Table object
     Table data_set = loader.read(fileName);
+    data_set.setTitle("Original");
 
     //Table.print() method on loaded data
     data_set.print();
+    
+    cout << endl;
 
-    Table t1 = data_set.dice(0.3, Table::begin);
-    Table t2 = data_set.dice(0.3, Table::begin, true);
+    Table t1 = data_set.dice(0.7);
+    Table t2 = data_set.dice(0.7, true);
+    t1.setTitle("Train");
+    t2.setTitle("Test");
+
     t1.print();
     t2.print();
 
