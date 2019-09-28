@@ -3,6 +3,7 @@
 #include "core/Loader.hpp"
 #include "core/Column.hpp"
 #include "core/Table.hpp"
+#include "models/Base.hpp"
 
 using std::cin;
 using std::cout;
@@ -32,6 +33,13 @@ int main(int argc, char**argv){
     t1.print();
     t2.print();
 
+    t1.join(t2);
+    t1.setTitle("Train + Test");
+    t1.print();
+
+    t1.unify(t2);
+    t1.setTitle("Train U Test");
+    t1.print();
 
     return 0;
 }

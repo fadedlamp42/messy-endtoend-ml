@@ -129,5 +129,35 @@ class Table{
             cout << endl;
         }
     }
+
+    void join(const Table& arg, bool force = false){
+        unsigned int column_size = columns.back().data.size();
+
+        for(Column x : arg.columns){
+            if(x.data.size() != column_size){
+                cout << "WARNING: Asymmetric join (a joined column has varying length)" ;
+                if(force)
+                    cout << ", continuing..." << endl;
+                else{
+                    cout << endl;
+                    return;
+                }
+            }
+
+            push(x);
+        }
+    }
+
+    void unify(const Table& arg){
+        if(columns.size() != arg.columns.size()){
+            cout << "WARNING: Asymmetric union (a unified row has varying length)";
+            return;
+        }
+
+        for(unsigned int x=0; x<columns.size(); ++x)
+            for(std::string s : arg.columns[x].data)
+                columns[x].data.push_back(s);
+    }
+        
 };
 #endif
