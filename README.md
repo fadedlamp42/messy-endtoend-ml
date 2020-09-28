@@ -1,4 +1,5 @@
 # messy-endtoend-ml
+## DEPRECIATED: I consider this repo archived and will not commit actively anymore.
 First shot at implementing machine learning from scratch. This means writing everything from the data loading to implementing whichever algorithm(s) I choose. 
 
 This project also serves as a way to really get comfortable using git as that seems long overdo.
